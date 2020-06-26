@@ -1,7 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { GiftedChat } from 'react-native-gifted-chat';
+import React, {useState, useEffect} from 'react';
+import {GiftedChat} from 'react-native-gifted-chat';
 import initialMessages from './messages';
-import { renderInputToolbar, renderActions, renderComposer, renderSend } from './InputToolbar';
+import {
+  renderInputToolbar,
+  renderActions,
+  renderComposer,
+  renderSend,
+} from './InputToolbar';
 import {
   renderAvatar,
   renderBubble,
@@ -15,38 +20,36 @@ import messages from './messages';
 class Chat extends React.Component {
   state = {
     messages: [],
-    newText: ''
+    newText: '',
   };
 
-
-  componentDidMount(){
+  componentDidMount() {
     this.setState({
-      messages: initialMessages.reverse()
-    })
+      messages: initialMessages.reverse(),
+    });
   }
 
   onSend = (newMessages = []) => {
     let newMessageList = GiftedChat.append(this.state.messages, newMessages);
     this.setState({
-      messages: newMessageList
-    })
+      messages: newMessageList,
+    });
 
-    let latestMessage = newMessages[newMessages.length - 1];    
-    if(latestMessage.user._ida === 1){
+    let latestMessage = newMessages[newMessages.length - 1];
+    if (latestMessage.user._ida === 1) {
       //handle repsonse gen
       let response = {
-        _id: (latestMessage._id + 1),
+        _id: latestMessage._id + 1,
         text: 'Ok',
         createdAt: new Date(),
         user: {
           _id: 2,
           name: 'Up Levl',
-        }
+        },
       };
     }
   };
 
-  
   render() {
     return (
       <GiftedChat
@@ -77,12 +80,12 @@ class Chat extends React.Component {
         renderMessageText={renderMessageText}
         renderCustomView={renderCustomView}
         isCustomViewBottom
-        messagesContainerStyle={{ backgroundColor: 'white' }}
-        parsePatterns={(linkStyle) => [
+        messagesContainerStyle={{backgroundColor: 'white'}}
+        parsePatterns={linkStyle => [
           {
             pattern: /#(\w+)/,
             style: linkStyle,
-            onPress: (tag) => console.log(`Pressed on hashtag: ${tag}`),
+            onPress: tag => console.log(`Pressed on hashtag: ${tag}`),
           },
         ]}
       />

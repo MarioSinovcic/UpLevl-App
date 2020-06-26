@@ -1,9 +1,14 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import { View, Text } from 'react-native';
-import { Avatar, Bubble, SystemMessage, Message, MessageText } from 'react-native-gifted-chat';
+import {View, Text} from 'react-native';
+import {
+  Avatar,
+  Bubble,
+  SystemMessage,
+  Message,
+  MessageText,
+} from 'react-native-gifted-chat';
 
-export const renderAvatar = (props) => (
+export const renderAvatar = props => (
   <Avatar
     {...props}
     // containerStyle={{ left: { borderWidth: 3, borderColor: 'red' }, right: {} }}
@@ -11,7 +16,7 @@ export const renderAvatar = (props) => (
   />
 );
 
-export const renderBubble = (props) => (
+export const renderBubble = props => (
   <Bubble
     {...props}
     // renderTime={() => <Text>Time</Text>}
@@ -41,16 +46,16 @@ export const renderBubble = (props) => (
   />
 );
 
-export const renderSystemMessage = (props) => (
+export const renderSystemMessage = props => (
   <SystemMessage
-    // {...props}
-    // containerStyle={{ backgroundColor: 'pink' }}
-    // wrapperStyle={{ borderWidth: 10, borderColor: 'white' }}
-    // textStyle={{ color: 'crimson', fontWeight: '900' }}
+  // {...props}
+  // containerStyle={{ backgroundColor: 'pink' }}
+  // wrapperStyle={{ borderWidth: 10, borderColor: 'white' }}
+  // textStyle={{ color: 'crimson', fontWeight: '900' }}
   />
 );
 
-export const renderMessage = (props) => (
+export const renderMessage = props => (
   <Message
     {...props}
     // renderDay={() => <Text>Date</Text>}
@@ -61,7 +66,7 @@ export const renderMessage = (props) => (
   />
 );
 
-export const renderMessageText = (props) => (
+export const renderMessageText = props => (
   <MessageText
     {...props}
     // containerStyle={{
