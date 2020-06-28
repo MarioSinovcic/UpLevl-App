@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {GiftedChat} from 'react-native-gifted-chat';
-import initialMessages from './messages';
+// import initialMessages from './messages';
 import {
   renderInputToolbar,
   renderActions,
@@ -15,7 +15,9 @@ import {
   renderMessageText,
   renderCustomView,
 } from './MessageContainer.js';
-import messages from './messages';
+import {getDummyMessage} from '../services/messageService';
+
+// import messages from './messages';
 
 class Chat extends React.Component {
   state = {
@@ -23,7 +25,9 @@ class Chat extends React.Component {
     newText: '',
   };
 
-  componentDidMount() {
+  async componentDidMount() {
+    const initialMessages = await getDummyMessage();
+
     this.setState({
       messages: initialMessages.reverse(),
     });

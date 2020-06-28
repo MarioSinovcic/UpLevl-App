@@ -9,6 +9,7 @@
     "test": "jest",
     "lint": "eslint ."
   },
+  "proxy": "http://localhost:5002",
   "dependencies": {
     "@react-native-community/masked-view": "^0.1.10",
     "react": "^16.13.1",
