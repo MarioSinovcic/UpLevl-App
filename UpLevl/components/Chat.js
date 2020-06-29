@@ -15,7 +15,7 @@ import {
   renderMessageText,
   renderCustomView,
 } from './MessageContainer.js';
-import {getDummyMessage} from '../services/messageService';
+import {getDummyMessage, postMessage} from '../services/messageService';
 
 // import messages from './messages';
 
@@ -33,25 +33,27 @@ class Chat extends React.Component {
     });
   }
 
-  onSend = (newMessages = []) => {
+  onSend = async (newMessages = []) => {
     let newMessageList = GiftedChat.append(this.state.messages, newMessages);
     this.setState({
       messages: newMessageList,
     });
 
     let latestMessage = newMessages[newMessages.length - 1];
-    if (latestMessage.user._ida === 1) {
-      //handle repsonse gen
-      let response = {
-        _id: latestMessage._id + 1,
-        text: 'Ok',
-        createdAt: new Date(),
-        user: {
-          _id: 2,
-          name: 'Up Levl',
-        },
-      };
-    }
+
+    await postMessage(latestMessage);
+    // console.log(latestMessage);
+    // if (latestMessage.user._id === 1) {
+    //   //handle repsonse gen
+    //   let response = {
+    //     text: 'Ok',
+    //     createdAt: new Date(),
+    //     user: {
+    //       _id: 2,
+    //       name: 'Up Levl',
+    //     },
+    //   };
+    // }
   };
 
   render() {
@@ -63,7 +65,7 @@ class Chat extends React.Component {
         onSend={this.onSend}
         user={{
           _id: 1,
-          name: 'Aaron',
+          name: 'Username',
           avatar: 'https://placeimg.com/150/150/any',
         }}
         alignTop
