@@ -14,7 +14,6 @@ export const getDummyMessage = async () => {
 };
 
 export const postMessage = async message => {
-  delete message._id;
   const newParams = {
     message,
   };
@@ -30,6 +29,5 @@ export const postMessage = async message => {
     body: reqBody,
   }).then(response => response.json());
 
-  console.log(res);
   return res;
 };

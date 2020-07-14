@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {GiftedChat} from 'react-native-gifted-chat';
+import {ObjectID} from 'bson';
 // import initialMessages from './messages';
 import {
   renderInputToolbar,
@@ -33,27 +34,19 @@ class Chat extends React.Component {
     });
   }
 
-  onSend = async (newMessages = []) => {
-    let newMessageList = GiftedChat.append(this.state.messages, newMessages);
+  onSend = async newMessage => {
+    let newMessageList = GiftedChat.append(this.state.messages, newMessage);
     this.setState({
       messages: newMessageList,
     });
 
-    let latestMessage = newMessages[newMessages.length - 1];
+    const botResponse = await postMessage(newMessage);
 
-    await postMessage(latestMessage);
-    // console.log(latestMessage);
-    // if (latestMessage.user._id === 1) {
-    //   //handle repsonse gen
-    //   let response = {
-    //     text: 'Ok',
-    //     createdAt: new Date(),
-    //     user: {
-    //       _id: 2,
-    //       name: 'Up Levl',
-    //     },
-    //   };
-    // }
+    newMessageList = GiftedChat.append(this.state.messages, botResponse);
+
+    this.setState({
+      messages: newMessageList,
+    });
   };
 
   render() {
@@ -62,7 +55,11 @@ class Chat extends React.Component {
         messages={this.state.messages}
         text={this.state.newText}
         onInputTextChanged={text => this.setState({newText: text})}
-        onSend={this.onSend}
+        onSend={messages => {
+          const message = messages[0];
+          message._id = new ObjectID().toHexString();
+          this.onSend(message);
+        }}
         user={{
           _id: 1,
           name: 'Username',

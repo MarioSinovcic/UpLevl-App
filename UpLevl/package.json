@@ -12,6 +12,7 @@
   "proxy": "http://localhost:5002",
   "dependencies": {
     "@react-native-community/masked-view": "^0.1.10",
+    "bson": "^4.0.4",
     "react": "^16.13.1",
     "react-native": "^0.62.2",
     "react-native-gesture-handler": "^1.6.1",
