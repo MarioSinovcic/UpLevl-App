@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {GiftedChat} from 'react-native-gifted-chat';
+import {ObjectID} from 'bson';
 // import initialMessages from './messages';
 import {
   renderInputToolbar,
@@ -34,6 +35,9 @@ class Chat extends React.Component {
   }
 
   onSend = async (newMessages = []) => {
+    console.log(newMessages);
+    const newMessage = newMessages[0];
+    newMessage._id = new ObjectID();
     let newMessageList = GiftedChat.append(this.state.messages, newMessages);
     this.setState({
       messages: newMessageList,
@@ -41,7 +45,16 @@ class Chat extends React.Component {
 
     let latestMessage = newMessages[newMessages.length - 1];
 
-    await postMessage(latestMessage);
+    const botResponse = await postMessage(latestMessage);
+
+    newMessageList = GiftedChat.append(this.state.messages, botResponse);
+
+    this.setState({
+      messages: newMessageList,
+    });
+
+    console.log(this.state.messages);
+
     // console.log(latestMessage);
     // if (latestMessage.user._id === 1) {
     //   //handle repsonse gen

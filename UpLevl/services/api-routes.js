@@ -1,4 +1,4 @@
 const apiURI = 'https://uplevl.herokuapp.com/api';
 
-export const getDummyMessageRoute = `${apiURI}/dummy`;
-export const postMessageRoute = `${apiURI}/message`;
+export const getDummyMessageRoute = `${apiURI}/chat/dummy`;
+export const postMessageRoute = `${apiURI}/chat/message`;
